@@ -23,7 +23,8 @@ clean_tempdir() {
     exit "$1"
 }
 trap 'clean_tempdir $?' EXIT
-trap 'clean_tempdir 130' INT TERM
+trap 'clean_tempdir 130' INT
+trap 'clean_tempdir 143' TERM
 
 
 OUTPUT=$(grep 'Output:' "$SOURCE_FILE" | sed 's/.*Output:\s*//' | tr -d '[:space:]')
@@ -82,4 +83,3 @@ mv "$OUTPUT" "$SOURCE_DIR/" || {
 }
 
 clean_tempdir 0
-
